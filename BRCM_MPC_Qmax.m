@@ -275,13 +275,12 @@ ub = [ub_x;ub_u];
 % sigma >= 0 --> lb_sigma
 % sigma >= 0
 
-%% defining 
+%% Output selection matrix
 I = eye(nz_zones); % identity num zones matrix (5x5 identity)
 
-% Output selection matrix.
-% It selects the first 5 states, the zone temperatures.
-I_nz = zeros(nz_zones,nx); % (5x113 of zeros) 
-I_nz(:,1:nz_zones) = I; % 5 first columns = I, extracts the 5 zone temperatures from the 113-state vector
+% Selects the first 5 states, the zone temperatures.
+I_nz = zeros(nz_zones,nx);  
+I_nz(:,1:nz_zones) = I; % 5 first columns = I, extracts the 5 zone temperatures from the N-state vector
 
 % Output matrix.
 % Zone temperatures are calculated as y = C*x.
@@ -585,4 +584,5 @@ tank_size.V = V;
 % Save tank sizing data if needed.
 
 %save('building3_data.mat','tank_size');
+
 
