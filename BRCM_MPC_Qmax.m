@@ -150,14 +150,23 @@ SolRad_N = zeros(1,n_sim);
 T_amb = zeros(1,n_sim);
 
 for i = 1:n_sim
+
+   % Synthetic solar radiation profile
+   % The sine function creates a daily pattern
+   % max(0, ...) makes sure radiation is never negative
    sine = max(0,(600*sin(2*pi*i/(24*4) + 3*pi/2)-100));
-   % emulate how diffrent angles of Sunlight due to Earth revolution
+
+   % emulate diffrent angles of Sunlight due to Earth revolution
+   % East-facing solar radiation.
    SolRad_E(i) = sine*0.7;  
+   % South-facing solar radiation.
    SolRad_S(i) = sine;
+   % North-facing solar radiation is set to zero.
    SolRad_N(i) = 0; % azimuth
 
-   T_amb(i) = -2.5 + 7.5*sin(2*pi*i/(24*4)+3*pi/2); % -5 to 10 deg Celsius
-
+   % Synthetic ambient temperature profile.
+   % Temperature varies during the day using a sinusoidal function.
+   T_amb(i) = -2.5 + 7.5*sin(2*pi*i/(24*4)+3*pi/2); 
 end
 
 
@@ -186,12 +195,12 @@ u_min = -g(1:2:end); % Extract lower radiator bounds from BRCM constraint vector
 u_max =  g(2:2:end); % Extract upper radiator bounds from BRCM constraint vector
 
 % Maximum heating power available from (DHS) and grid [W]
-Qmax_DHS = 80000;
-Qmax_grid = 80000;
+%Qmax_DHS = 80000;
+%Qmax_grid = 80000;
 
 % Extend input bounds with DHS and grid power variables
-u_min_expand = [u_min; 0; 0]; 
-u_max_expand = [u_max; Qmax_DHS; Qmax_grid];
+%u_min_expand = [u_min; 0; 0]; 
+%u_max_expand = [u_max; Qmax_DHS; Qmax_grid];
 
 %% Zone temperature limits [Celsius]
 % Min/max allowed zone temperature
@@ -573,4 +582,5 @@ tank_size.E_total_kWh = E_total_kWh;
 tank_size.V = V;
 
 % Save tank sizing data if needed.
+
 %save('building3_data.mat','tank_size');
