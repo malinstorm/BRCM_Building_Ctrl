@@ -71,11 +71,11 @@ indices_SolS_v = getIdIndex('v_solGlobFac_S',B.building_model.identifiers.v);
 
 % Disturbance indices for internal gains in each zone.
 % These are used to assign heat gains from people to the correct disturbance channels.
-indices_IG_zone1 = getIdIndex('v_IG_ZoneOne',B.building_model.identifiers.v);
-indices_IG_zone2 = getIdIndex('v_IG_ZoneTwo',B.building_model.identifiers.v);
-indices_IG_zone3 = getIdIndex('v_IG_ZoneThree',B.building_model.identifiers.v);
-indices_IG_zone4 = getIdIndex('v_IG_ZoneFour',B.building_model.identifiers.v);
-indices_IG_zone5 = getIdIndex('v_IG_ZoneFive',B.building_model.identifiers.v);
+% indices_IG_zone1 = getIdIndex('v_IG_ZoneOne',B.building_model.identifiers.v);
+% indices_IG_zone2 = getIdIndex('v_IG_ZoneTwo',B.building_model.identifiers.v);
+% indices_IG_zone3 = getIdIndex('v_IG_ZoneThree',B.building_model.identifiers.v);
+% indices_IG_zone4 = getIdIndex('v_IG_ZoneFour',B.building_model.identifiers.v);
+% indices_IG_zone5 = getIdIndex('v_IG_ZoneFive',B.building_model.identifiers.v);
 
 
 
@@ -173,20 +173,21 @@ end
 %% Internal Gains
 %Internal_Gains = 5*ones(1,n_sim); % constant ig 5 W/m^2
 
-load('ihg_model.mat'); % load data from internal gains model/ occypancy profile
 
-p_array = internalHeatGain.p_array; % occupancy profile from igh.mat
-p_array = p_array(1:nz_zones,:); % Keep only the occupancy profiles for the modelled zones (5 rows, 96 timesteps (n_days = 1))
-
-p_array = repmat(p_array,1,ceil(n_sim/96)); % repat matrix m x n times 
-p_array = p_array(:,1:n_sim); % ensure only comlumns needed for simulation (for n_days = 1.5, etc)
-
-Q_IG = 100*p_array; % 100 W scaling factor - scale occupancy profile to Internal Heat Gain
-q_internalgain_m2 = zeros(nu,n_sim); % allocate storage for W/m^2
-
-for i = 1:nu
-   q_internalgain_m2(i,:) = Q_IG(i,:)./Sq_m_zones(i); % divide by sq m --> [W/m^2]
-end
+% load('ihg_model.mat'); % load data from internal gains model/ occypancy profile
+% 
+% p_array = internalHeatGain.p_array; % occupancy profile from igh.mat
+% p_array = p_array(1:nz_zones,:); % Keep only the occupancy profiles for the modelled zones (5 rows, 96 timesteps (n_days = 1))
+% 
+% p_array = repmat(p_array,1,ceil(n_sim/96)); % repat matrix m x n times 
+% p_array = p_array(:,1:n_sim); % ensure only comlumns needed for simulation (for n_days = 1.5, etc)
+% 
+% Q_IG = 100*p_array; % 100 W scaling factor - scale occupancy profile to Internal Heat Gain
+% q_internalgain_m2 = zeros(nu,n_sim); % allocate storage for W/m^2
+% 
+% for i = 1:nu
+%    q_internalgain_m2(i,:) = Q_IG(i,:)./Sq_m_zones(i); % divide by sq m --> [W/m^2]
+% end
 
 
 %% Min/max radiator input bounds [W/m^2]
@@ -352,11 +353,11 @@ v_array(indices_SolN_v,:) = SolRad_N;
 %v_array(indices_IG_zone5,:) = Internal_Gains;
 
 % Assign internal gains from occupancy model to each zone
-v_array(indices_IG_zone1,:) = q_internalgain_m2(1,:);
-v_array(indices_IG_zone2,:) = q_internalgain_m2(2,:);
-v_array(indices_IG_zone3,:) = q_internalgain_m2(3,:);
-v_array(indices_IG_zone4,:) = q_internalgain_m2(4,:);
-v_array(indices_IG_zone5,:) = q_internalgain_m2(5,:);
+% v_array(indices_IG_zone1,:) = q_internalgain_m2(1,:);
+% v_array(indices_IG_zone2,:) = q_internalgain_m2(2,:);
+% v_array(indices_IG_zone3,:) = q_internalgain_m2(3,:);
+% v_array(indices_IG_zone4,:) = q_internalgain_m2(4,:);
+% v_array(indices_IG_zone5,:) = q_internalgain_m2(5,:);
 
 % Initial disturbance vector.
 v0 = v_array(:,1);
@@ -584,3 +585,4 @@ tank_size.V = V;
 % Save tank sizing data if needed.
 
 %save('building3_data.mat','tank_size');
+
