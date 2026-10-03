@@ -12,7 +12,7 @@ BRCMRootPath = getBRCMRootPath();
 
 % Navigate to folder
 cd(BRCMRootPath);
-folder = 'C:\Users\Malin Storm\Documents\MATLAB\BRCM\BRCMToolbox_v1.03\brcm\v1.03\all\BRCMToolbox_v1.03\Buildings\3\1_day';
+folder = 'C:\name\Documents\MATLAB\BRCM\BRCMToolbox_v1.03\brcm\v1.03\all\BRCMToolbox_v1.03\Buildings\3\1_day';
 
 % Global debug level used by BRCM
 global g_debugLvl
