@@ -1,6 +1,6 @@
 
 clear; clc; close all; 
-folder = 'C:\Users\Malin Storm\Documents\MATLAB\BRCM\BRCMToolbox_v1.03\brcm\v1.03\all\BRCMToolbox_v1.03\Building_All\4buildings_DHS_GRID2';
+folder = 'C:\Documents\MATLAB\BRCM\BRCMToolbox_v1.03\brcm\v1.03\all\BRCMToolbox_v1.03\Building_All\4buildings_DHS_GRID2';
 if ~exist(folder,'dir')
      mkdir(folder)
 end
